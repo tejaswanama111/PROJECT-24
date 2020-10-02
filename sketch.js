@@ -4,8 +4,8 @@ const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 
 var box1, box2, box3;
-var ground, groundSprite;
 var paper;
+var ground1;
 
 function setup() {
 	createCanvas(800, 700);
@@ -14,16 +14,12 @@ function setup() {
 	world = engine.world;
 
 	box1 = new Box(600,650,200,20);
-	box2 = new Box(500,610,20,100);
-	box3 = new Box(700,610,20,100); 
+	box2 = new Box(500,610,20,200);
+	box3 = new Box(700,610,20,200); 
 
-	groundSprite=createSprite(width/2, height-35, width,10);
-	groundSprite.shapeColor=color("yellow");
+	paper = new PaperObject(50,500,55);
 
-	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
-	World.add(world, ground);
-
-	paper = new PaperObject(50,500);
+	ground1 = new Ground(400,690,800,70);
   
 }
 
@@ -38,14 +34,13 @@ function draw() {
   box2.display();
   box3.display();
   paper.display();
-
-  drawSprites();
+  ground1.display();
  
 }
 
 function keyPressed() {
 	if(keyCode === UP_ARROW) {
 
-		Matter.Body.applyForce(paper, paper.body.position, {x:625, y:400});
+		Matter.Body.applyForce(paper.body, paper.body.position, {x:625, y:1500});
 	}
 }
